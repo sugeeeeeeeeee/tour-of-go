@@ -30,10 +30,7 @@ func main() {
 	p := &Person{name:"Taro",age:"10"}
 	fmt.Println(p.profile("header string"))
 }
-とすることでstructにメソッドを定義した形で利用できる。
-
-
-
+などとすることでstructにメソッドを定義した形で利用できる。
 */
 package main
 
@@ -50,7 +47,7 @@ func (v Vertex) Abs() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 
-func (v Vertex) Add() float64 {
+func (v *Vertex) Add() float64 {
 	return v.X + v.Y
 }
 
