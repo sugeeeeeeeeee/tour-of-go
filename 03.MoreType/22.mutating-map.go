@@ -1,3 +1,16 @@
+/*
+map mへの値の挿入や更新
+ m[key] = value
+要素の取得
+ elem = m[key]
+要素の削除
+ dele(m, key)
+キーに対する要素の存在確認
+ elem, ok = m[key]
+ if ok == true {
+	 fmt.Println(ok)
+ }
+*/
 package main
 
 import "fmt"

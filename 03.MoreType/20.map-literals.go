@@ -1,6 +1,6 @@
 /*
 mapリテラルはstructリテラルに似ているがkeyが必要
-
+stringがキーで、structが値
 */
 package main
 
