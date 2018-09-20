@@ -1,3 +1,22 @@
+/*
+# インターフェイス型とは
+- メソッドのシグニチャの集まり
+	- どのようなメソッドを実装するべきかを規定したもの
+- 下記構成。
+
+type <型名> interface {
+    メソッド名(引数の型, ...) (返り値の型, ...)
+    ・
+    ・
+}
+
+- 下記例だと
+	- Myfloatをtypeでinterfaceとして定義する。
+	- mainで-√(2)をMyfloatでfへ代入する。
+	-
+
+
+*/
 package main
 
 import (
@@ -26,7 +45,7 @@ func main() {
 
 type MyFloat float64
 
-func (f MyFloat) Abs() float64 {
+func (f float64) Abs() float64 {
 	if f < 0 {
 		return float64(-f)
 	}
@@ -37,6 +56,8 @@ type Vertex struct {
 	X, Y float64
 }
 
+/*
 func (v *Vertex) Abs() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
+*/
