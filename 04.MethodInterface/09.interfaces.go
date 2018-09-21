@@ -15,49 +15,65 @@ type <型名> interface {
 	- mainで-√(2)をMyfloatでfへ代入する。
 	-
 
+ちなみにtypeはinterfaceを宣言するだけでなく
+型を宣言するために使用する。
 
 */
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
-type Abser interface {
-	Abs() float64
+type MyInt int
+
+type describe interface {
+	description() string
+}
+
+type Square struct {
+	edgeLength int
+}
+
+type Product struct {
+	id    uint
+	name  string
+	price uint
+	PR    PRStatement
+}
+
+type PRStatement func() string
+
+func (pr PRStatement) description() string {
+	return pr()
+}
+
+func (s *Square) description() string {
+	return fmt.Sprintf("The lengths of all four sides are equal. [edgeLength: %d]", s.edgeLength)
+}
+
+// 組み込み型の別名の型をレシーバにして対象インターフェースのメソッドを定義
+func (i MyInt) description() string {
+	return fmt.Sprintf("MyInt is actually int. value is %d", i)
+}
+
+func printDescription(d describe) {
+	fmt.Printf("Description: %s\n", d.description())
 }
 
 func main() {
-	var a Abser
-	f := MyFloat(-math.Sqrt2)
-	v := Vertex{3, 4}
 
-	a = f  // a MyFloat implements Abser
-	a = &v // a *Vertex implements Abser
+	// 既存の組み込み型にインターフェイスを実装させる
+	val1 := MyInt(100)
+	printDescription(val1)
 
-	// In the following line, v is a Vertex (not *Vertex)
-	// and does NOT implement Abser.
-	//a = v
+	// 構造体にインターフェイスを実装させる
+	sq := &Square{edgeLength: 10}
+	printDescription(sq)
 
-	fmt.Println(a.Abs())
-}
-
-type MyFloat float64
-
-func (f float64) Abs() float64 {
-	if f < 0 {
-		return float64(-f)
+	// 関数にインターフェイスを実装させる
+	p1 := &Product{id: 1, name: "Google", price: 1000}
+	p1.PR = func() string {
+		return fmt.Sprintf("%d", p1.name)
 	}
-	return float64(f)
-}
+	printDescription(p1.PR)
 
-type Vertex struct {
-	X, Y float64
 }
-
-/*
-func (v *Vertex) Abs() float64 {
-	return math.Sqrt(v.X*v.X + v.Y*v.Y)
-}
-*/

@@ -1,22 +1,29 @@
+/*
+interfaceはメソッドの集まり。
+インターフェイス型の宣言時に指定したメソッドを実装することで
+インターフェイスを実装することができる。
+
+下記例だと関数にインターフェイスを実装させている
+
+*/
 package main
 
 import "fmt"
 
-type I interface {
-	M()
+type person struct {
+	name string
+	age  int
 }
 
-type T struct {
-	S string
+type i interface {
+	age() int
 }
 
-// This method means type T implements the interface I,
-// but we don't need to explicitly declare that it does so.
-func (t T) M() {
-	fmt.Println(t.S)
+func (p person) m() int {
+	return p.age
 }
 
 func main() {
-	var i I = T{"hello"}
-	i.M()
+	i := person{name: "Taro", age: 20}
+	fmt.Println(i.m())
 }
