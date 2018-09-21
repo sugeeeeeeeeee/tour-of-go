@@ -1,3 +1,6 @@
+/*
+空のインターフェイスは任意の型の値を保持できる。
+*/
 package main
 
 import "fmt"
