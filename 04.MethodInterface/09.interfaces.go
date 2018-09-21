@@ -15,6 +15,8 @@ type <型名> interface {
 	- mainで-√(2)をMyfloatでfへ代入する。
 	-
 
+ちなみにtypeはinterfaceを宣言するだけでなく
+型を宣言するために使用する。
 
 */
 package main
@@ -29,6 +31,19 @@ type describe interface {
 
 type Square struct {
 	edgeLength int
+}
+
+type Product struct {
+	id    uint
+	name  string
+	price uint
+	PR    PRStatement
+}
+
+type PRStatement func() string
+
+func (pr PRStatement) description() string {
+	return pr()
 }
 
 func (s *Square) description() string {
@@ -53,4 +68,12 @@ func main() {
 	// 構造体にインターフェイスを実装させる
 	sq := &Square{edgeLength: 10}
 	printDescription(sq)
+
+	// 関数にインターフェイスを実装させる
+	p1 := &Product{id: 1, name: "Google", price: 1000}
+	p1.PR = func() string {
+		return fmt.Sprintf("%d", p1.name)
+	}
+	printDescription(p1.PR)
+
 }
